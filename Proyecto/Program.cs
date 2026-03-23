@@ -195,8 +195,41 @@ class program
         }
 
        
+        if (!valido)
+        {
+            Console.WriteLine("Resultado: Rechazado");
+            Console.WriteLine("Motivo: " + motivo);
+            rechazados++;
+            return;
+        }
+
+        string impacto = "Bajo";
+
+        if (produccion == "alta" || duracion > 120 || (hora >= 20 && hora <= 23))
+        {
+            impacto = "Alto";
+        }
+
+        else if (produccion == "media" || (duracion >= 60 && duracion <= 120))
+        {
+            impacto = "Medio";
+        }
+
+        if(impacto == "Alto")
+        {
+            Console.WriteLine("Resultado: En Revision");
+            revision++;
+        }
+
+        else
+        {
+            Console.WriteLine("Resultado: Publicado");
+        
+                
+        }
     }
-         
+
+   
    
    
 
