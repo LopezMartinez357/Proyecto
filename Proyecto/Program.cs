@@ -22,9 +22,52 @@ class program
             Console.WriteLine("5. Salir");
 
 
-        }
+            while (!int.TryParse(Console.ReadLine(), out opcion))
+            {
+
+                Console.Write("Ingrese un numero valido: ");
+
+            }
+
+            switch (opcion)
+            {
+                case 1:
+                    Evaluar();
+                    break;
+
+                case 2:
+                    MostrarReglas();
+                    break;
+
+                case 3:
+                    MostrarEstadisticas();
+                    break;
+
+                case 4:
+                    total = publicados = rechazados = revision = 0;
+                    Console.WriteLine("Estadisticas reiniciadas");
+                    break;
+
+                case 5:
+                    Console.WriteLine("Saliendo del Sistema");
+                    break;
+
+                default:
+                    Console.WriteLine("Opcion no valida");
+                    break;
+
+
+
+
+
+            }
+
+
+        } while (opcion != 5);
 
 
     }
+
+    static
 
 }
