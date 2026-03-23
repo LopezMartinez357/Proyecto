@@ -1,4 +1,5 @@
 ﻿using System;
+using System.ComponentModel.DataAnnotations;
 using System.Data;
 
 class program
@@ -76,16 +77,6 @@ class program
         Console.WriteLine("+13: 6:00 a 22:00");
         Console.WriteLine("+18: 22:00 a 5:00");
 
-        Console.WriteLine("Duracion por tipo:");
-        Console.WriteLine("Peliculas: 60 - 180 minutos");
-        Console.WriteLine("Series: 20 - 90 minutos por episodio");
-        Console.WriteLine("Documentales: 30 - 120 minutos");
-        Console.WriteLine("Eventos en vivo: 30 - 240 minutos");
-
-        Console.WriteLine("Produccion");
-        Console.WriteLine("Baja: solo todo publico o +13");
-        Console.WriteLine("Media o Alta: cualquier clasificacion");
-
     }
 
     static void  MostrarEstadisticas()
@@ -106,6 +97,107 @@ class program
 
     }
 
+    static void Evaluar()
+    {
+        string tipo, clasificacion, produccion;
+        int duracion, hora;
+
+        total++;
+
+        Console.WriteLine("Nuevo Contenido");
+
+
+        do
+        {
+            Console.Write("Tipo (pelicula, serie, documental, evento en vivo): ");
+            tipo = Console.ReadLine().ToLower();
+
+        } while(tipo != "pelicula" && tipo != "serie" && tipo != "documental" && tipo != "evento en vivo");
+
+        do
+        {
+            Console.Write("Duracion: ");
+
+        } while (!int.TryParse(Console.ReadLine(), out duracion));
+
+
+        do
+        {
+            Console.Write("Clasificacion (todo publico, +13, +18): ");
+            clasificacion = Console.ReadLine().ToLower();
+        } while (!int.TryParse(Console.ReadLine(), out hora) || hora < 0 || hora > 23);
+
+
+        do
+        {
+            Console.Write("Hora (0-23): ");
+        } while (!int.TryParse(Console.ReadLine(), out hora) || hora < 0 || hora > 23 );
+
+        do
+        {
+            Console.Write("Produccion (baja, media, alta): ");
+            produccion = Console.ReadLine().ToLower();
+        } while (produccion != "baja" && produccion != "media" && produccion != "alta");
+
+        bool valido = true;
+        string motivo = "";
+
+        if (clasificacion == "+13" && (hora < 6 || hora > 22))
+        {
+            valido = false;
+            motivo = "Horario no permitido para +13. ";
+
+        }
+
+        if (clasificacion == "+18" && (hora >= 22 || hora <= 5))
+        {
+            valido = false;
+            motivo += "Horario no permitido para +18. ";
+        }
+        
+
+        if (valido)
+        {
+            if (tipo == "pelicula")
+            {
+                valido = false;
+                motivo = "Duracion no permitida para pelicula";
+            }
+
+        }
+
+        else if (tipo == "serie")
+        {
+            if ( duracion < 20 || duracion > 90)
+            {
+                valido = false;
+                motivo = "Duracion no permitida para serie";
+            }
+        }
+
+        else if (tipo == "documental")
+        {
+            if (duracion < 30 || duracion > 120)
+            {
+                valido = false;
+                motivo = "Duracion no permitida para documental";
+            }
+        }
+
+        else
+        {
+            if (duracion <30 || duracion > 240)
+            {
+                valido = true;
+                motivo = "Duracion no perimitida para envento en vivo";
+
+            }
+        }
+
+       
+    }
+         
+   
    
 
 }
