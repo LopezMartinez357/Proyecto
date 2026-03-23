@@ -14,7 +14,7 @@ class program
 
         do
         {
-            Console.WriteLine("MENU PRINCIPAL");
+            Console.WriteLine("Selecciones una opcion: ");
             Console.WriteLine("1. Evaluar contenido");
             Console.WriteLine("2. Mostrar reglas");
             Console.WriteLine("3. Mostrar estadisticas");
@@ -44,7 +44,10 @@ class program
                     break;
 
                 case 4:
-                    total = publicados = rechazados = revision = 0;
+                    total = 0;
+                    publicados = 0;
+                    rechazados = 0;
+                    revision = 0;
                     Console.WriteLine("Estadisticas reiniciadas");
                     break;
 
@@ -56,18 +59,19 @@ class program
                     Console.WriteLine("Opcion no valida");
                     break;
 
+            } 
 
-
-
-
-            }
-
-
-        } while (opcion != 5);
+        } while (opcion != 5) ;
 
 
     }
 
-    static
+    static void MostrarReglas()
+    {
+
+        Console.WriteLine("Reglas del sistema");
+        Console.WriteLine("Clasifiacion y horario:");
+    }
+
 
 }
