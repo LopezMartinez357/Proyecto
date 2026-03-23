@@ -1,8 +1,5 @@
 ﻿using System;
-using System.ComponentModel.DataAnnotations;
-using System.Data;
-
-class program
+class Program
 {
     static int total = 0;
     static int publicados = 0;
@@ -16,7 +13,7 @@ class program
 
         do
         {
-            Console.WriteLine("Selecciones una opcion: ");
+            Console.WriteLine("Seleccione una opcion: ");
             Console.WriteLine("1. Evaluar contenido");
             Console.WriteLine("2. Mostrar reglas");
             Console.WriteLine("3. Mostrar estadisticas");
@@ -125,8 +122,7 @@ class program
         {
             Console.Write("Clasificacion (todo publico, +13, +18): ");
             clasificacion = Console.ReadLine().ToLower();
-        } while (!int.TryParse(Console.ReadLine(), out hora) || hora < 0 || hora > 23);
-
+        } while (clasificacion != "todo" && clasificacion != "+13" && clasificacion != "+18");
 
         do
         {
@@ -149,51 +145,56 @@ class program
 
         }
 
-        if (clasificacion == "+18" && (hora >= 22 || hora <= 5))
+        if (clasificacion == "+18" && !(hora >= 22 || hora <= 5))
         {
             valido = false;
-            motivo += "Horario no permitido para +18. ";
+            motivo += "Horario no permitido para +18 ";
         }
-        
+
 
         if (valido)
         {
             if (tipo == "pelicula")
             {
-                valido = false;
-                motivo = "Duracion no permitida para pelicula";
+
+                if (duracion < 60 || duracion > 180)
+                {
+                    valido = false;
+                    motivo = "Duracion no permitida para pelicula";
+                }
             }
 
-        }
 
-        else if (tipo == "serie")
-        {
-            if ( duracion < 20 || duracion > 90)
+
+            else if (tipo == "serie")
             {
-                valido = false;
-                motivo = "Duracion no permitida para serie";
+                if (duracion < 20 || duracion > 90)
+                {
+                    valido = false;
+                    motivo = "Duracion no permitida para serie";
+                }
             }
-        }
 
-        else if (tipo == "documental")
-        {
-            if (duracion < 30 || duracion > 120)
+            else if (tipo == "documental")
             {
-                valido = false;
-                motivo = "Duracion no permitida para documental";
+                if (duracion < 30 || duracion > 120)
+                {
+                    valido = false;
+                    motivo = "Duracion no permitida para documental";
+                }
             }
-        }
 
-        else
-        {
-            if (duracion <30 || duracion > 240)
+            else
             {
-                valido = true;
-                motivo = "Duracion no perimitida para envento en vivo";
+                if (duracion < 30 || duracion > 240)
+                {
+                    valido = false;
+                    motivo = "Duracion no perimitida para envento en vivo";
 
+                }
             }
+           
         }
-
        
         if (!valido)
         {
@@ -224,6 +225,7 @@ class program
         else
         {
             Console.WriteLine("Resultado: Publicado");
+            publicados++;
         
                 
         }
